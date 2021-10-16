@@ -1,0 +1,9 @@
+config BR2_PACKAGE_LIBRETRO_QUICKNES
+	bool "libretro-quicknes"
+	depends on BR2_PACKAGE_RETROARCH
+	depends on BR2_INSTALL_LIBSTDCPP
+	help
+	 placeholder
+
+comment "QuickNES requires a toolchain w/ C++"
+	depends on !BR2_INSTALL_LIBSTDCPP

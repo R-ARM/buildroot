@@ -2557,4 +2557,20 @@ menu "Text editors and viewers"
 	source "package/vim/Config.in"
 endmenu
 
+menu "Ragnarok programs"
+	source "package/rmenu/Config.in"
+	source "package/rdaemon/Config.in"
+	source "package/rinputer/Config.in"
+	source "package/retroarch/Config.in"
+	source "package/retroarch-assets/Config.in"
+	source "package/libretro-core-info/Config.in"
+	source "package/libretro-quicknes/Config.in"
+	source "package/libretro-fceumm/Config.in"
+	source "package/libretro-snes9x/Config.in"
+	source "package/libretro-parallel-n64/Config.in"
+	source "package/libretro-mupen64plus-nx/Config.in"
+	source "package/libretro-mgba/Config.in"
+	source "package/libretro-ppsspp/Config.in"
+endmenu
+
 endmenu

@@ -4,9 +4,9 @@
 #
 ################################################################################
 
-WESTON_VERSION = 9.0.0
-WESTON_SITE = https://wayland.freedesktop.org/releases
-WESTON_SOURCE = weston-$(WESTON_VERSION).tar.xz
+WESTON_VERSION = 9.0.1
+WESTON_SITE = https://gitlab.freedesktop.org/wayland/weston/-/archive/main
+WESTON_SOURCE = weston-main.tar.gz
 WESTON_LICENSE = MIT
 WESTON_LICENSE_FILES = COPYING
 WESTON_CPE_ID_VENDOR = wayland
@@ -25,6 +25,8 @@ WESTON_CONF_OPTS += -Dsimple-clients=dmabuf-v4l
 else
 WESTON_CONF_OPTS += -Dsimple-clients=
 endif
+
+WESTON_CONF_OPTS += -Dtests=false
 
 ifeq ($(BR2_PACKAGE_SEATD),y)
 WESTON_CONF_OPTS += -Dlauncher-libseat=true

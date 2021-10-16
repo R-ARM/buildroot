@@ -1,0 +1,5 @@
+config BR2_PACKAGE_RETROARCH_ASSETS
+	bool "Retroarch Assets"
+	depends on BR2_PACKAGE_RETROARCH
+	help
+	  retroarch assets lmfao

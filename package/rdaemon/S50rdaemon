@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ $1 = start ]; then
+	rdaemon &
+	echo $! > /tmp/rdaemon_pid
+fi
+
+if [ $1 = stop ]; then
+	kill -9 $(cat /tmp/rdaemon_pid)
+fi

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RMENU
+	bool "Rmenu"
+	help
+	  The menu for Ragnarok OS
+	  
+	  https://github.com/R-ARM/Ragnarok

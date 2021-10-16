@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RDAEMON
+	bool "Rdaemon"
+	help
+	  The handler for background key presses for Ragnarok OS
+	  
+	  https://github.com/R-ARM/Ragnarok
