@@ -5,7 +5,7 @@
 ################################################################################
 
 RMENU_VERSION = main
-RMENU_SITE = git://github.com/R-ARM/Rmenu.git
+RMENU_SITE = git@github.com:R-ARM/Rmenu.git
 RMENU_SITE_METHOD = git
 RMENU_DEPENDENCIES = sdl2 sdl2_ttf
 RMENU_CFLAGS = -DROS

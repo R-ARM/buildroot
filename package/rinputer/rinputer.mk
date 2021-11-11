@@ -5,7 +5,7 @@
 ################################################################################
 
 RINPUTER_VERSION = HEAD
-RINPUTER_SITE = git://github.com/R-ARM/Rinputer.git
+RINPUTER_SITE = git@github.com:R-ARM/Rinputer.git
 RINPUTER_SITE_METHOD = git
 RINPUTER_CFLAGS = -DROS
 

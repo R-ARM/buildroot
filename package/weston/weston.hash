@@ -1,6 +1,0 @@
-# From https://lists.freedesktop.org/archives/wayland-devel/2020-September/041595.html
-md5  b406da0fe9139fd39653238fde22a6cf  weston-9.0.0.tar.xz
-sha1  90b9540a0bd6d6f7a465817f1c696d4d393183c9  weston-9.0.0.tar.xz
-sha256  c1a4fa3b8dce38515dba963deab9b3ccc03402e3d9472a1a9b0351c6f9b3d900  weston-main.tar.gz
-sha512  07c5396fd84d2b86f9db90a4f7a6a06f840f9b6eb4eaf292084d4a5872e864ebfa5a74592e18957c0badadc3f653d93df670fd73383429ac2870ca867fbe8c13  weston-main.tar.gz
-sha256  fdb65868f65d0fbdb05c2d3b779e10ce9969fa0c4b9262ba4f260e87086ab860  COPYING
