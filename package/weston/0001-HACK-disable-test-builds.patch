@@ -1,0 +1,24 @@
+From 99bdc48335accce8583cd33e8d627caa21e11c0c Mon Sep 17 00:00:00 2001
+From: Maccraft123 <maccraft123mc@gmail.com>
+Date: Thu, 9 Dec 2021 13:48:05 +0000
+Subject: [PATCH] HACK: disable test builds
+
+---
+ meson.build | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 78a4df93..a527be5d 100644
+--- a/meson.build
++++ b/meson.build
+@@ -179,7 +179,6 @@ subdir('remoting')
+ subdir('pipewire')
+ subdir('clients')
+ subdir('wcap')
+-subdir('tests')
+ subdir('data')
+ subdir('man')
+ 
+-- 
+2.32.0
+

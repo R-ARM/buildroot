@@ -15,7 +15,7 @@ endef
 
 define RINPUTER_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/rinputer $(TARGET_DIR)/bin/rinputer
-	$(INSTALL) -D -m 0755 $(@D)/S15Rinputer $(TARGET_DIR)/etc/init.d/S15Rinputer
+	$(INSTALL) -D -m 0755 $(@D)/S15rinputer $(TARGET_DIR)/etc/init.d/S15Rinputer
 endef
 
 
