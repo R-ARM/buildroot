@@ -5,12 +5,12 @@
 ################################################################################
 
 # Version 1.9.8
-RETROARCH_VERSION = v1.9.8
+RETROARCH_VERSION = v1.9.14
 RETROARCH_SITE = git://github.com/libretro/RetroArch.git
 RETROARCH_SITE_METHOD = git
 RETROARCH_LICENSE = GPLv3+
 RETROARCH_CONF_OPTS += --disable-oss --enable-zlib
-RETROARCH_DEPENDENCIES = host-pkgconf
+RETROARCH_DEPENDENCIES = host-pkgconf libgl
 
 RETROARCH_COMPILER_COMMONS_CFLAGS = $(COMPILER_COMMONS_CFLAGS_NOLTO)
 RETROARCH_COMPILER_COMMONS_CXXFLAGS = $(COMPILER_COMMONS_CXXFLAGS_NOLTO)
@@ -29,9 +29,11 @@ RETROARCH_CONF_OPTS += --prefix=/usr \
 --disable-sdl \
 --enable-sdl2 \
 --disable-x11 \
---enable-wayland \
+--disable-wayland \
 --disable-dbus \
---enable-opengles
+--disable-opengl_core \
+--disable-opengl \
+--disable-egl 
 
 define RETROARCH_CONFIGURE_CMDS
 	(cd $(@D); rm -rf config.cache; \
