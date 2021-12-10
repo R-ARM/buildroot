@@ -26,8 +26,6 @@ else
 WESTON_CONF_OPTS += -Dsimple-clients=
 endif
 
-WESTON_CONF_OPTS += -Dtests=false
-
 #ifeq ($(BR2_PACKAGE_SEATD),y)
 #WESTON_CONF_OPTS += -Dlauncher-libseat=true
 #WESTON_DEPENDENCIES += seatd
