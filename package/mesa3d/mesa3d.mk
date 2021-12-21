@@ -5,7 +5,7 @@
 ################################################################################
 
 # When updating the version, please also update mesa3d-headers
-MESA3D_VERSION = 21.3.0
+MESA3D_VERSION = 21.3.1
 MESA3D_SOURCE = mesa-$(MESA3D_VERSION).tar.xz
 MESA3D_SITE = https://archive.mesa3d.org
 MESA3D_LICENSE = MIT, SGI, Khronos
@@ -33,6 +33,15 @@ MESA3D_CONF_OPTS = \
 # flag due to a linker bug between binutils 2.24 and 2.25 (2.24.51.20140217).
 ifeq ($(BR2_TOOLCHAIN_EXTERNAL_CODESOURCERY_ARM),y)
 MESA3D_CONF_OPTS += -Db_asneeded=false
+endif
+
+ifeq ($(BR2_PACKAGE_MESA3D_DRI3),y)
+MESA3D_CONF_OPTS += -Ddri3=enabled
+ifeq ($(BR2_PACKAGE_XLIB_LIBXSHMFENCE),y)
+MESA3D_DEPENDENCIES += xlib_libxshmfence
+endif
+else
+MESA3D_CONF_OPTS += -Ddri3=disabled
 endif
 
 ifeq ($(BR2_PACKAGE_MESA3D_LLVM),y)
@@ -123,14 +132,8 @@ endif
 
 ifeq ($(BR2_PACKAGE_MESA3D_DRI_DRIVER),)
 MESA3D_CONF_OPTS += \
-	-Ddri-drivers= -Ddri3=disabled
+	-Ddri-drivers=
 else
-ifeq ($(BR2_PACKAGE_XLIB_LIBXSHMFENCE),y)
-MESA3D_DEPENDENCIES += xlib_libxshmfence
-MESA3D_CONF_OPTS += -Ddri3=enabled
-else
-MESA3D_CONF_OPTS += -Ddri3=disabled
-endif
 MESA3D_CONF_OPTS += \
 	-Dshared-glapi=enabled \
 	-Dglx-direct=true \
@@ -143,7 +146,6 @@ MESA3D_CONF_OPTS += \
 else
 MESA3D_DEPENDENCIES += xlib_libxshmfence
 MESA3D_CONF_OPTS += \
-	-Ddri3=enabled \
 	-Dvulkan-drivers=$(subst $(space),$(comma),$(MESA3D_VULKAN_DRIVERS-y))
 endif
 
