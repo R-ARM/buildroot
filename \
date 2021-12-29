@@ -10,11 +10,9 @@ RETROARCH_LICENSE = GPLv3+
 RETROARCH_DEPENDENCIES = host-pkgconf
 
 RETROARCH_CONF_OPTS = --disable-oss --enable-zlib --disable-qt --enable-threads --enable-ozone --enable-xmb --disable-discord
-RETROARCH_CONF_OPTS += --disable-flac --enable-lua --enable-networking --enable-translate --enable-rgui --disable-cdrom --enable-sdl2 --disable-wayland
+RETROARCH_CONF_OPTS += --disable-flac --enable-lua --enable-networking --enable-translate --enable-rgui --disable-cdrom
 
 RETROARCH_CONF_OPTS += --sysconfdir=$(STAGING_DIR)
-
-LDFLAGS += -lGL
 
 ifeq ($(BR2_PACKAGE_FFMPEG),y)
 	RETROARCH_CONF_OPTS += --enable-ffmpeg
@@ -23,12 +21,12 @@ else
 	RETROARCH_CONF_OPTS += --disable-ffmpeg
 endif
 
-#ifeq ($(BR2_PACKAGE_SDL2),y)
-#	RETROARCH_CONF_OPTS += --enable-sdl2
+ifeq ($(BR2_PACKAGE_SDL2),y)
+	RETROARCH_CONF_OPTS += --enable-sdl2
 	RETROARCH_DEPENDENCIES += sdl2
-#else
-#	RETROARCH_CONF_OPTS += --disable-sdl2
-#endif
+else
+	RETROARCH_CONF_OPTS += --disable-sdl2
+endif
 
 #ifeq ($(BR2_PACKAGE_LIBDRM),y)
 #	RETROARCH_CONF_OPTS += --enable-kms
@@ -58,19 +56,19 @@ else
 	RETROARCH_CONF_OPTS += --disable-pulse
 endif
 
-ifeq ($(BR2_PACKAGE_HAS_LIBGLES),y)
-	RETROARCH_CONF_OPTS += --enable-opengles
-	RETROARCH_DEPENDENCIES += libgles
-else
-	RETROARCH_CONF_OPTS += --disable-opengles
-endif
+#ifeq ($(BR2_PACKAGE_HAS_LIBGLES),y)
+#	RETROARCH_CONF_OPTS += --enable-opengles
+#	RETROARCH_DEPENDENCIES += libgles
+#else
+#	RETROARCH_CONF_OPTS += --disable-opengles
+#endif
 
-ifeq ($(BR2_PACKAGE_HAS_LIBEGL),y)
-	RETROARCH_CONF_OPTS += --enable-egl
-	RETROARCH_DEPENDENCIES += libegl
-else
+#ifeq ($(BR2_PACKAGE_HAS_LIBEGL),y)
+#	RETROARCH_CONF_OPTS += --enable-egl
+#	RETROARCH_DEPENDENCIES += libegl
+#else
 	RETROARCH_CONF_OPTS += --disable-egl
-endif
+#endif
 
 ifeq ($(BR2_PACKAGE_HAS_LIBOPENVG),y)
 	RETROARCH_DEPENDENCIES += libopenvg
@@ -100,24 +98,23 @@ ifeq ($(BR2_PACKAGE_HAS_LIBGL),y)
 endif
 
 define RETROARCH_CONFIGURE_CMDS
-	cd $(@D); rm -rf config.cache; \
-		$(TARGET_CONFIGURE_ARGS) \
-		PKG_CONF_PATH="pkg-config" \
-		PKG_CONFIG_PATH="$(HOST_PKG_CONFIG_PATH):$(PKG_CONFIG_PATH)" \
-		$(TARGET_CONFIGURE_OPTS) \
-		CFLAGS="$(TARGET_CFLAGS) $(RETROARCH_TARGET_CFLAGS) -DEGL_NO_X11=1" \
-		LDFLAGS="$(TARGET_LDFLAGS) -lc -lGL -I$(TARGET_DIR)/usr/include/SDL2" \
-		CROSS_COMPILE="$(HOST_DIR)/usr/bin/" \
-		./configure $(RETROARCH_CONF_OPTS)
-	
-
-
-#	cd $(@D) && \
-#	PKG_CONFIG_PATH="$(HOST_PKG_CONFIG_PATH):$(PKG_CONFIG_PATH)" \
-#	$(TARGET_CONFIGURE_OPTS) \
-#	$(TARGET_CONFIGURE_ARGS) \
-#	CROSS_COMPILE="$(TARGET_CROSS)" \
-#	./configure $(RETROARCH_CONF_OPTS)
+#	(cd $(@D); rm -rf config.cache; \
+#		$(TARGET_CONFIGURE_ARGS) \
+#		$(TARGET_CONFIGURE_OPTS) \
+#		CFLAGS="$(TARGET_CFLAGS) $(RETROARCH_TARGET_CFLAGS)" \
+#		LDFLAGS="$(TARGET_LDFLAGS) -lc" \
+#		CROSS_COMPILE="$(HOST_DIR)/usr/bin/" \
+#		./configure \
+#		--prefix=/usr \
+#		$(RETROARCH_CONF_OPTS) \
+#	)
+	cd $(@D) && \
+	PKG_CONF_PATH=pkg-config \
+	PKG_CONFIG_PATH="$(HOST_PKG_CONFIG_PATH)" \
+	$(TARGET_CONFIGURE_OPTS) \
+	$(TARGET_CONFIGURE_ARGS) \
+	CROSS_COMPILE="$(TARGET_CROSS)" \
+	./configure $(RETROARCH_CONFIG_OPTS)
 endef
 
 define RETROARCH_BUILD_CMDS
