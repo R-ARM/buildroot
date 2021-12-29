@@ -1,5 +1,7 @@
 #!/bin/sh
-set -v
+set -x
+set -e
+bsdtar xf output/images/rootfs.tar -C $RFS_PATH
 mkdir -p $RFS_PATH/temp
 chmod 700 $RFS_PATH/temp
 echo '#!/bin/sh' > $RFS_PATH/etc/init.d/S20weston
