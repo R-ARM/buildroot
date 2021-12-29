@@ -1,150 +1,72 @@
 ################################################################################
 #
-# retroarch
+# RetroArch, yoinked that package from https://gitlab.com/recalbox/recalbox/-/blob/master/package/retroarch/retroarch.mk
 #
 ################################################################################
-# Version.: Release on Dec 05, 2021
+
+# Version 1.9.8
 RETROARCH_VERSION = v1.9.14
-RETROARCH_SITE = $(call github,libretro,RetroArch,$(RETROARCH_VERSION))
+RETROARCH_SITE = git://github.com/libretro/RetroArch.git
+RETROARCH_SITE_METHOD = git
 RETROARCH_LICENSE = GPLv3+
-RETROARCH_DEPENDENCIES = host-pkgconf
+RETROARCH_CONF_OPTS += --disable-oss --enable-zlib
+RETROARCH_DEPENDENCIES = host-pkgconf libgl
 
-RETROARCH_CONF_OPTS = --disable-oss --enable-zlib --disable-qt --enable-threads --enable-ozone --enable-xmb --disable-discord
-RETROARCH_CONF_OPTS += --disable-flac --enable-lua --enable-networking --enable-translate --enable-rgui --disable-cdrom --enable-sdl2 --disable-wayland
+RETROARCH_COMPILER_COMMONS_CFLAGS = $(COMPILER_COMMONS_CFLAGS_NOLTO)
+RETROARCH_COMPILER_COMMONS_CXXFLAGS = $(COMPILER_COMMONS_CXXFLAGS_NOLTO)
+RETROARCH_COMPILER_COMMONS_LDFLAGS = $(COMPILER_COMMONS_LDFLAGS_NOLTO)
 
-RETROARCH_CONF_OPTS += --sysconfdir=$(STAGING_DIR)
+#RETROARCH_CONF_OPTS += --disable-nvda --disable-video_filter --disable-winrawinput --disable-dsp_filter --disable-blissbox --disable-caca --enable-rgui --disable-materialui --enable-xmb --disable-ozone --disable-runahead --disable-dsound --disable-xaudio --disable-wasapi --disable-winmm --disable-ssl --enable-sdl2 --disable-libusb --disable-dbus --disable-systemd --enable-udev --enable-threads --enable-thread_storage --disable-ffmpeg --disable-mpv --enable-dylib --disable-networking --enable-opengl --disable-opengl1 --enable-opengl_core --enable-opengles --enable-opengles3 --disable-x11 --disable-kms --disable-plain_drm --enable-wayland --enable-egl --enable-dynamic_egl --disable-vg --disable-cg --enable-zlib --enable-alsa --disable-oss --disable-al --disable-jack --disable-pulse --enable-freetype --disable-xvideo --disable-flac --disable-dr_mp3 --disable-online_updater --disable-parport --disable-qt --enable-mmap --disable-imageviewer --disable-xshm --disable-cheevos --disable-discord --disable-accessibility --disable-translate --disable-vulkan --disable-hid --disable-videocore --disable-cdrom --disable-steam --disable-wifi
 
-LDFLAGS += -lGL
-
-ifeq ($(BR2_PACKAGE_FFMPEG),y)
-	RETROARCH_CONF_OPTS += --enable-ffmpeg
-	RETROARCH_DEPENDENCIES += ffmpeg
-else
-	RETROARCH_CONF_OPTS += --disable-ffmpeg
-endif
-
-#ifeq ($(BR2_PACKAGE_SDL2),y)
-#	RETROARCH_CONF_OPTS += --enable-sdl2
-	RETROARCH_DEPENDENCIES += sdl2
-#else
-#	RETROARCH_CONF_OPTS += --disable-sdl2
-#endif
-
-#ifeq ($(BR2_PACKAGE_LIBDRM),y)
-#	RETROARCH_CONF_OPTS += --enable-kms
-#endif
-
-ifeq ($(BR2_ARM_FPU_NEON_VFPV4)$(BR2_ARM_FPU_NEON)$(BR2_ARM_FPU_NEON_FP_ARMV8),y)
-    RETROARCH_CONF_OPTS += --enable-neon
-endif
-
-ifeq ($(BR2_GCC_TARGET_FLOAT_ABI),hard)
-    RETROARCH_CONF_OPTS += --enable-floathard
-endif
-
-# x86 : no option
-
-#ifeq ($(BR2_PACKAGE_ALSA_LIB),y)
-#	RETROARCH_CONF_OPTS += --enable-alsa
-#	RETROARCH_DEPENDENCIES += alsa-lib
-#else
-#	RETROARCH_CONF_OPTS += --disable-alsa
-#endif
-
-ifeq ($(BR2_PACKAGE_PULSEAUDIO),y)
-	RETROARCH_CONF_OPTS += --enable-pulse
-	RETROARCH_DEPENDENCIES += pulseaudio
-else
-	RETROARCH_CONF_OPTS += --disable-pulse
-endif
-
-ifeq ($(BR2_PACKAGE_HAS_LIBGLES),y)
-	RETROARCH_CONF_OPTS += --enable-opengles
-	RETROARCH_DEPENDENCIES += libgles
-else
-	RETROARCH_CONF_OPTS += --disable-opengles
-endif
-
-ifeq ($(BR2_PACKAGE_HAS_LIBEGL),y)
-	RETROARCH_CONF_OPTS += --enable-egl
-	RETROARCH_DEPENDENCIES += libegl
-else
-	RETROARCH_CONF_OPTS += --disable-egl
-endif
-
-ifeq ($(BR2_PACKAGE_HAS_LIBOPENVG),y)
-	RETROARCH_DEPENDENCIES += libopenvg
-endif
-
-ifeq ($(BR2_PACKAGE_ZLIB),y)
-	RETROARCH_CONF_OPTS += --enable-zlib
-	RETROARCH_DEPENDENCIES += zlib
-else
-	RETROARCH_CONF_OPTS += --disable-zlib
-endif
-
-ifeq ($(BR2_PACKAGE_UDEV),y)
-	RETROARCH_DEPENDENCIES += udev
-endif
-
-#ifeq ($(BR2_PACKAGE_FREETYPE),y)
-#	RETROARCH_CONF_OPTS += --enable-freetype
-#	RETROARCH_DEPENDENCIES += freetype
-#else
-	RETROARCH_CONF_OPTS += --disable-freetype
-#endif
-
-ifeq ($(BR2_PACKAGE_HAS_LIBGL),y)
-	RETROARCH_CONF_OPTS += --enable-opengl --disable-opengles
-	RETROARCH_DEPENDENCIES += libgl
-endif
+RETROARCH_CONF_OPTS += --prefix=/usr \
+--disable-builtinflac \
+--disable-builtinmbedtls \
+--disable-builtinminiupnpc \
+--disable-builtinzlib \
+--disable-cg \
+--disable-jack \
+--disable-oss \
+--disable-sdl \
+--enable-sdl2 \
+--disable-x11 \
+--disable-wayland \
+--disable-dbus \
+--disable-opengl_core \
+--disable-opengl \
+--disable-egl 
 
 define RETROARCH_CONFIGURE_CMDS
-	cd $(@D); rm -rf config.cache; \
+	(cd $(@D); rm -rf config.cache; \
 		$(TARGET_CONFIGURE_ARGS) \
-		PKG_CONF_PATH="pkg-config" \
-		PKG_CONFIG_PATH="$(HOST_PKG_CONFIG_PATH):$(PKG_CONFIG_PATH)" \
 		$(TARGET_CONFIGURE_OPTS) \
-		CFLAGS="$(TARGET_CFLAGS) $(RETROARCH_TARGET_CFLAGS) -DEGL_NO_X11=1" \
-		LDFLAGS="$(TARGET_LDFLAGS) -lc -lGL -I$(TARGET_DIR)/usr/include/SDL2" \
-		CROSS_COMPILE="$(HOST_DIR)/usr/bin/" \
-		./configure $(RETROARCH_CONF_OPTS)
-	
-
-
-#	cd $(@D) && \
-#	PKG_CONFIG_PATH="$(HOST_PKG_CONFIG_PATH):$(PKG_CONFIG_PATH)" \
-#	$(TARGET_CONFIGURE_OPTS) \
-#	$(TARGET_CONFIGURE_ARGS) \
-#	CROSS_COMPILE="$(TARGET_CROSS)" \
-#	./configure $(RETROARCH_CONF_OPTS)
+		CFLAGS="$(TARGET_CFLAGS) $(RETROARCH_COMPILER_COMMONS_CFLAGS)" \
+		CXXFLAGS="$(TARGET_CXXFLAGS) $(RETROARCH_COMPILER_COMMONS_CXXFLAGS)" \
+		LDFLAGS="$(TARGET_LDFLAGS) $(RETROARCH_COMPILER_COMMONS_LDFLAGS) -lc" \
+		CROSS_COMPILE="$(HOST_DIR)/bin/" \
+		PKG_CONFIG_PATH="$(STAGING_DIR)/usr/lib/pkgconfig/" \
+		./configure \
+		--prefix=/usr \
+		$(RETROARCH_CONF_OPTS) \
+	)
 endef
 
+define RETROARCH_FIX_LIBS
+	$(SED) "s|-\([IL]\)/usr|-\1$(STAGING_DIR)/usr|g" $(@D)/config.mk
+endef
+
+RETROARCH_POST_CONFIGURE_HOOKS += RETROARCH_FIX_LIBS
+
 define RETROARCH_BUILD_CMDS
-	$(TARGET_CONFIGURE_OPTS) $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" LD="$(TARGET_LD)" -C $(@D)/
-	$(TARGET_CONFIGURE_OPTS) $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" LD="$(TARGET_LD)" -C $(@D)/gfx/video_filters
-	$(TARGET_CONFIGURE_OPTS) $(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" LD="$(TARGET_LD)" -C $(@D)/libretro-common/audio/dsp_filters
+	$(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" LD="$(TARGET_LD)" -C $(@D) all
 endef
 
 define RETROARCH_INSTALL_TARGET_CMDS
 	$(MAKE) CXX="$(TARGET_CXX)" -C $(@D) DESTDIR=$(TARGET_DIR) install
-
-	mkdir -p $(TARGET_DIR)/usr/share/video_filters
-	cp $(@D)/gfx/video_filters/*.so $(TARGET_DIR)/usr/share/video_filters
-	cp $(@D)/gfx/video_filters/*.filt $(TARGET_DIR)/usr/share/video_filters
-
-	mkdir -p $(TARGET_DIR)/usr/share/audio_filters
-	cp $(@D)/libretro-common/audio/dsp_filters/*.so $(TARGET_DIR)/usr/share/audio_filters
-	cp $(@D)/libretro-common/audio/dsp_filters/*.dsp $(TARGET_DIR)/usr/share/audio_filters
-endef
-
-define RETROARCH_INSTALL_STAGING_CMDS
-	$(MAKE) CXX="$(TARGET_CXX)" -C $(@D) DESTDIR=$(STAGING_DIR) install
 endef
 
 $(eval $(generic-package))
 
-# DEFINITION OF LIBRETRO PLATFORM
-LIBRETRO_PLATFORM = unix
-LIBRETRO_PLATFORM += arm64
-LIBRETRO_PLATFORM += neon
+RETROARCH_LIBRETRO_PLATFORM += unix
+RETROARCH_LIBRETRO_PLATFORM += armv8
+
+RETROARCH_LIBRETRO_BOARD=$(RETROARCH_LIBRETRO_PLATFORM)
