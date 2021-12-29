@@ -7,7 +7,7 @@ chmod 700 $RFS_PATH/temp
 echo '#!/bin/sh' > $RFS_PATH/etc/init.d/S20weston
 echo 'export XDG_RUNTIME_DIR=/temp' >> $RFS_PATH/etc/init.d/S20weston
 echo 'if [ "$1" = "start" ]; then' >> $RFS_PATH/etc/init.d/S20weston
-echo 'weston --config=/root/.config/weston.ini --drm-device=card1 --seat=0 --continue-without-input --shell=kiosk-shell.so >/tmp/weston.log 2>&1 &' >> $RFS_PATH/etc/init.d/S20weston
+echo 'weston --config=/root/.config/weston.ini --drm-device=card1 --seat=0 --continue-without-input --shell=desktop-shell.so >/tmp/weston.log 2>&1 &' >> $RFS_PATH/etc/init.d/S20weston
 echo 'echo $! > /tmp/weston_pid' >> $RFS_PATH/etc/init.d/S20weston
 echo 'fi' >> $RFS_PATH/etc/init.d/S20weston
 echo 'if [ "$1" = "stop" ]; then kill -9 $(cat /tmp/weston_pid); fi' >> $RFS_PATH/etc/init.d/S20weston
@@ -20,7 +20,9 @@ repaint-window=15
 name=DSI-1
 transform=rotate-90
 [autolaunch]
-path=/bin/rmenu' > $RFS_PATH/root/.config/weston.ini
+path=/bin/rmenu
+[shell]
+panel-position=none' > $RFS_PATH/root/.config/weston.ini
 
 cp retroarch.cfg $RFS_PATH/etc/retroarch.cfg
 
