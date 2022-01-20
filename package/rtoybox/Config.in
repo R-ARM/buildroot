@@ -1,0 +1,4 @@
+config BR2_PACKAGE_RTOYBOX
+	bool "Rtoybox, all programs"
+	help
+	  Everything libragnarok for Ragnarok OS

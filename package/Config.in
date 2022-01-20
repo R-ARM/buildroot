@@ -2597,6 +2597,7 @@ menu "Text editors and viewers"
 endmenu
 
 menu "Ragnarok programs"
+	source "package/rtoybox/Config.in"
 	source "package/rmenu/Config.in"
 	source "package/rdaemon/Config.in"
 	source "package/rinputer/Config.in"
