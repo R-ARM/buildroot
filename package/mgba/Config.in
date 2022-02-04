@@ -1,0 +1,10 @@
+config BR2_PACKAGE_MGBA
+	bool "mgba"
+	depends on BR2_INSTALL_LIBSTDCPP
+	help
+	  A GBA emulator core for ARM.
+
+	  http://www.libretro.com
+
+comment "MGBA needs a toolchain w/ C++"
+	depends on !BR2_INSTALL_LIBSTDCPP
