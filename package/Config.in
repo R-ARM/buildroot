@@ -2603,6 +2603,7 @@ menu "Ragnarok programs"
 	source "package/rinputer/Config.in"
 	source "package/rplayer/Config.in"
 	source "package/mgba/Config.in"
+	source "package/mednafen/Config.in"
 endmenu
 
 endmenu
