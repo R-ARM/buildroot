@@ -14,7 +14,7 @@ SDL2_CPE_ID_PRODUCT = simple_directmedia_layer
 SDL2_INSTALL_STAGING = YES
 SDL2_CONFIG_SCRIPTS = sdl2-config
 
-SDL2_DEPENDENCIES = wayland wayland-protocols
+SDL2_DEPENDENCIES = wayland wayland-protocols weston
 SDL2_CONF_OPTS = \
 	--disable-rpath \
 	--disable-arts \
