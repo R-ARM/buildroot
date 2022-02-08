@@ -1,0 +1,4 @@
+config BR2_PACKAGE_SDLJSTEST
+	bool "sdl-jstest"
+	help
+	  sdl jstest

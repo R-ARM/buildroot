@@ -350,6 +350,7 @@ comment "Graphic libraries"
 	source "package/sdl2_mixer/Config.in"
 	source "package/sdl2_net/Config.in"
 	source "package/sdl2_ttf/Config.in"
+	source "package/sdljstest/Config.in"
 	source "package/tk/Config.in"
 
 comment "Other GUIs"
