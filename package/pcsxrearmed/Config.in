@@ -1,0 +1,4 @@
+config BR2_PACKAGE_PCSXREARMED
+	bool "pcsx rearmed"
+	help
+	  pcsxrearmed
