@@ -1,0 +1,4 @@
+config BR2_PACKAGE_XASH3D
+	bool "xash3d"
+	help
+	  hl1
