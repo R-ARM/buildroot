@@ -21,6 +21,8 @@ define RTOYBOX_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0644 $(@D)/Rmenu2/programs $(TARGET_DIR)/etc/rmenu/programs
 	$(INSTALL) -D -m 0644 $(@D)/Rmenu2/emulators $(TARGET_DIR)/etc/rmenu/emulators
 	$(INSTALL) -D -m 0755 $(@D)/Rmedia/rmedia $(TARGET_DIR)/bin/rmedia
+	$(INSTALL) -D -m 0755 $(@D)/Rpause/rpause $(TARGET_DIR)/bin/rpause
+	$(INSTALL) -D -m 0755 $(@D)/Rpause/volhelper.sh $(TARGET_DIR)/bin/rpause-getvol
 endef
 
 
