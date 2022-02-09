@@ -38,13 +38,4 @@ endef
 
 PPSSPP_PRE_CONFIGURE_HOOKS += PPSSPP_PRE_CONFIGURE
 
-define PPSSPP_INSTALL_TO_TARGET
-	cp -R $(@D)/assets $(TARGET_DIR)/bin/assets # :/
-	cp $(@D)/lib/*.so $(TARGET_DIR)/usr/lib/
-	cp $(@D)/PPSSPPSDL $(TARGET_DIR)/bin/PPSSPPSDL
-	chmod a+x $(TARGET_DIR)/bin/PPSSPPSDL
-endef
-
-PPSSPP_INSTALL_TARGET_CMDS = $(PPSSPP_INSTALL_TO_TARGET)
-
 $(eval $(cmake-package))
