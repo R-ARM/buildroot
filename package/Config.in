@@ -2607,6 +2607,7 @@ menu "Ragnarok programs"
 	source "package/mgba/Config.in"
 	source "package/mednafen/Config.in"
 	source "package/ppsspp/Config.in"
+	source "package/xash3d/Config.in"
 endmenu
 
 endmenu
