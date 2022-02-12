@@ -2,7 +2,7 @@
 # Automatically generated file; DO NOT EDIT.
 # Linux/arm64 5.15.0-rc6 Kernel Configuration
 #
-CONFIG_CC_VERSION_TEXT="aarch64-ragnarok-linux-gnu-gcc.br_real (Buildroot -gfa3d3c7cd1-dirty) 10.3.0"
+CONFIG_CC_VERSION_TEXT="aarch64-ragnarok-linux-gnu-gcc.br_real (Buildroot -g936e1b5e16) 10.3.0"
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=100300
 CONFIG_CLANG_VERSION=0
@@ -3619,7 +3619,7 @@ CONFIG_CONFIGFS_FS=y
 # CONFIG_NETWORK_FILESYSTEMS is not set
 CONFIG_NLS=y
 CONFIG_NLS_DEFAULT="iso8859-1"
-# CONFIG_NLS_CODEPAGE_437 is not set
+CONFIG_NLS_CODEPAGE_437=y
 # CONFIG_NLS_CODEPAGE_737 is not set
 # CONFIG_NLS_CODEPAGE_775 is not set
 # CONFIG_NLS_CODEPAGE_850 is not set
@@ -3667,7 +3667,7 @@ CONFIG_NLS_ISO8859_1=y
 # CONFIG_NLS_MAC_INUIT is not set
 # CONFIG_NLS_MAC_ROMANIAN is not set
 # CONFIG_NLS_MAC_TURKISH is not set
-# CONFIG_NLS_UTF8 is not set
+CONFIG_NLS_UTF8=y
 # CONFIG_DLM is not set
 # CONFIG_UNICODE is not set
 CONFIG_IO_WQ=y
