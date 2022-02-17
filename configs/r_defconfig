@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot -gd7c414f490-dirty Configuration
+# Buildroot -g5711ae15ec Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -1126,7 +1126,7 @@ BR2_PACKAGE_LIBERATION_SERIF=y
 # supertux needs OpenGL and a toolchain w/ C++, gcc >= 6, NPTL, dynamic library, wchar
 #
 BR2_PACKAGE_SUPERTUXKART=y
-BR2_PACKAGE_STKASSETS=y
+# BR2_PACKAGE_STKASSETS is not set
 # BR2_PACKAGE_XORCURSES is not set
 
 #
@@ -3198,6 +3198,8 @@ BR2_PACKAGE_RINPUTER=y
 # BR2_PACKAGE_MGBA is not set
 BR2_PACKAGE_MEDNAFEN=y
 BR2_PACKAGE_PPSSPP=y
+# BR2_PACKAGE_PCSXREARMED is not set
+# BR2_PACKAGE_XASH3D is not set
 
 #
 # Filesystem images
