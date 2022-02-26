@@ -6,7 +6,7 @@
 
 #RTOYBOX_VERSION = a175926c9cb54c60149cd28e23be68df7b8a9e01
 RTOYBOX_VERSION = HEAD
-RTOYBOX_SITE = git@github.com:R-ARM/Rtoybox.git
+RTOYBOX_SITE = https://github.com/R-ARM/Rtoybox.git
 RTOYBOX_SITE_METHOD = git
 RTOYBOX_DEPENDENCIES = sdl2 sdl2_ttf
 TARGET_CFLAGS += -DROS
