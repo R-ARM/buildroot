@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-CONNMAN_VERSION = 1.40
+CONNMAN_VERSION = 1.41
 CONNMAN_SOURCE = connman-$(CONNMAN_VERSION).tar.xz
 CONNMAN_SITE = $(BR2_KERNEL_MIRROR)/linux/network/connman
 CONNMAN_DEPENDENCIES = libglib2 dbus
@@ -107,6 +107,11 @@ endef
 CONNMAN_POST_INSTALL_TARGET_HOOKS += CONNMAN_INSTALL_CM
 else
 CONNMAN_CONF_OPTS += --disable-client
+endif
+
+ifeq ($(BR2_PACKAGE_LIBEXECINFO),y)
+CONNMAN_DEPENDENCIES += libexecinfo
+CONNMAN_CONF_ENV += LDFLAGS="$(TARGET_LDFLAGS) -lexecinfo"
 endif
 
 $(eval $(autotools-package))

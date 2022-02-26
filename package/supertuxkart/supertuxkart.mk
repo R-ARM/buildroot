@@ -6,7 +6,9 @@
 
 SUPERTUXKART_VERSION = 1.3
 SUPERTUXKART_SOURCE = SuperTuxKart-$(SUPERTUXKART_VERSION)-src.tar.xz
-SUPERTUXKART_SITE = http://github.com/supertuxkart/stk-code/releases/download/$(SUPERTUXKART_VERSION)
+# Do not use the github helper here, the generated tarball is *NOT*
+# the same as the one uploaded by upstream for the release.
+SUPERTUXKART_SITE = https://github.com/supertuxkart/stk-code/releases/download/$(SUPERTUXKART_VERSION)
 
 # Supertuxkart itself is GPL-3.0+, but it bundles a few libraries with different
 # licenses. Irrlicht, bullet and angelscript have Zlib license, while glew is
@@ -14,12 +16,23 @@ SUPERTUXKART_SITE = http://github.com/supertuxkart/stk-code/releases/download/$(
 SUPERTUXKART_LICENSE = GPL-3.0+
 SUPERTUXKART_LICENSE_FILES = COPYING
 
-SUPERTUXKART_DEPENDENCIES = \
+#SUPERTUXKART_DEPENDENCIES = \
 	host-pkgconf \
 	freetype \
-	openal \
+	enet \
+	harfbuzz \
+	jpeg \
+	libcurl \
+	libgl \
 	libogg \
-	libvorbis
+	libpng \
+	libsquish \
+	libvorbis \
+	openal \
+	sdl2 \
+	xlib_libXrandr \
+	zlib
+
 
 SUPERTUXKART_CONF_OPTS = -DUSE_SQLITE3=OFF \
 			 -DUSE_GLES2=ON \

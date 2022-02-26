@@ -1,7 +1,7 @@
 menuconfig BR2_PACKAGE_MPD
 	bool "mpd"
 	depends on BR2_INSTALL_LIBSTDCPP
-	depends on BR2_USE_WCHAR # flac
+	depends on BR2_USE_WCHAR # boost
 	depends on BR2_TOOLCHAIN_HAS_THREADS
 	depends on BR2_USE_MMU # fork
 	depends on BR2_TOOLCHAIN_HAS_ATOMIC
@@ -16,7 +16,7 @@ menuconfig BR2_PACKAGE_MPD
 	  it can play a variety of sound files while being
 	  controlled by its network protocol.
 
-	  http://www.musicpd.org
+	  https://www.musicpd.org
 
 if BR2_PACKAGE_MPD
 

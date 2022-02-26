@@ -33,6 +33,7 @@ OGRE_CXXFLAGS = $(TARGET_CXXFLAGS) -DGLEW_NO_GLU
 # Disable java and nvidia cg support.
 # Disable imgui overlay to avoid extra download from CMake.
 OGRE_CONF_OPTS = -DOGRE_BUILD_DEPENDENCIES=OFF \
+	-DOGRE_BUILD_COMPONENT_CSHARP=OFF \
 	-DOGRE_BUILD_COMPONENT_JAVA=OFF \
 	-DOGRE_BUILD_PLUGIN_CG=OFF \
 	-DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI=OFF \
@@ -41,9 +42,8 @@ OGRE_CONF_OPTS = -DOGRE_BUILD_DEPENDENCIES=OFF \
 	-DCMAKE_CXX_FLAGS="$(OGRE_CXXFLAGS)"
 
 # Enable optional python component if python interpreter is present on the target.
-ifeq ($(BR2_PACKAGE_PYTHON)$(BR2_PACKAGE_PYTHON3),y)
-OGRE_DEPENDENCIES += host-swig \
-	$(if $(BR2_PACKAGE_PYTHON3),host-python3,host-python)
+ifeq ($(BR2_PACKAGE_PYTHON3),y)
+OGRE_DEPENDENCIES += host-swig host-python3
 OGRE_CONF_OPTS += -DOGRE_BUILD_COMPONENT_PYTHON=ON
 else
 OGRE_CONF_OPTS += -DOGRE_BUILD_COMPONENT_PYTHON=OFF
